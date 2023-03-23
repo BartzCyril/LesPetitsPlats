@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap");
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+* {
+  border: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 42px 100px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header img {
+  width: 50px;
+  height: 46px;
+}
+header h1 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  color: #D04F4F;
+}
+
+form {
+  margin-top: 17px;
+  border-radius: 5px;
+  width: 100%;
+  height: 69px;
+  display: flex;
+  background: #E7E7E7;
+}
+form input {
+  width: 100%;
+  background: #E7E7E7;
+  margin-left: 24px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Lato", sans-serif;
+}
+form input::placeholder {
+  color: #000000;
+  opacity: 0.25;
+}
+form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  margin-right: 16px;
+}
+form i {
+  font-size: 2rem;
+  color: black;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  margin-top: 17px;
+}
+.filters .filters-items {
+  width: 170px;
+  height: 69px;
+  border-radius: 5px;
+}
+.filters .filters-items div {
+  display: flex;
+  padding: 23px 15px 24px 15px;
+}
+.filters .filters-items div p {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+.filters .filters-items div button {
+  margin-left: auto;
+}
+.filters #ingredients {
+  background: #3282F7;
+}
+.filters #appliance {
+  background: #68D9A4;
+}
+.filters #ustensils {
+  background: #ED6454;
+}
+
+/*# sourceMappingURL=style.css.map */
