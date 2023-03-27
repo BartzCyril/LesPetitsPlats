@@ -22,29 +22,39 @@
     <section class="filters">
         <div id="ingredients" class="filters-items">
             <div>
+                <input type="text" placeholder="Rechercher un ingrédient" id="searchIngredients" onclick="filterItemsBySearch('searchIngredients')" class="hidden">
                 <p>Ingredients</p>
                 <button>
-                    <img src="public/arrowDown.svg" alt="arrowDown">
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgIngredients" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
                 </button>
             </div>
         </div>
-        <div id="appliance" class="filters-items">
+        <div id="appliance" class="filters-items filters-items-size">
             <div>
+                <input type="text" placeholder="Rechercher un appareil" id="searchAppliance" onclick="filterItemsBySearch('searchAppliance')" class="hidden">
                 <p>Appareils</p>
                 <button>
-                    <img src="public/arrowDown.svg" alt="arrowDown">
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgAppliance" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
                 </button>
             </div>
         </div>
-        <div id="ustensils" class="filters-items">
+        <div id="ustensils" class="filters-items filters-items-size">
             <div>
+                <input type="text" placeholder="Rechercher un ustensil" id="searchUstensils" onclick="filterItemsBySearch('searchUstensils')" class="hidden">
                 <p>Ustensiles</p>
                 <button>
-                    <img src="public/arrowDown.svg" alt="arrowDown">
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgUstensils" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
                 </button>
             </div>
         </div>
     </section>
+    <section class="recipes"></section>
 </main>
 <script type="module" src="/scripts/main.ts"></script>
 </body>

@@ -11,6 +11,10 @@ button {
   cursor: pointer;
 }
 
+strong {
+  font-weight: bold;
+}
+
 body {
   max-width: 1440px;
   margin: 0 auto;
@@ -71,23 +75,46 @@ form {
     column-gap: 20px;
     margin-top: 17px;
     .filters-items {
-      width: 170px;
-      height: 69px;
       border-radius: 5px;
-      div {
+      padding: 23px 15px 24px 15px;
+      font-family: 'Lato', sans-serif;
+      div:first-child {
         display: flex;
-        padding: 23px 15px 24px 15px;
-        p {
-          font-family: 'Lato', sans-serif;
-          font-weight: 700;
+        input {
+          width: 100%;
+          color: white;
           font-size: 18px;
+        }
+        input::placeholder {
+          color: #FFFFFF;
+          opacity: 0.5;
+          font-size: 18px;
+        }
+        p {
+          font-weight: 700;
           line-height: 22px;
           color: #FFFFFF;
+          font-size: 18px;
         }
         button {
           margin-left: auto;
         }
       }
+      .filters-items-grid {
+        margin-top: 27px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        font-family: 'Lato', sans-serif;
+        color: white;
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+    .filters-items-size {
+      width: 170px;
+      height: 69px;
     }
     #ingredients {
       background: #3282F7;
@@ -98,4 +125,67 @@ form {
     #ustensils {
       background: #ED6454;;
     }
+}
+
+.recipes {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  .recipes-item {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 364px;
+    .recipes-item-img {
+      background: #C7BEBE;
+      height: 178px;
+      border-radius: 5px 5px 0px 0px;
+    }
+    .recipes-item-informations {
+      display: flex;
+      flex-direction: column;
+      background: #E7E7E7;
+      height: 186px;
+      border-radius: 0px 0px 5px 5px;
+      padding: 20px 20px 0 20px;
+      header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: 'Lato', sans-serif;
+        font-size: 18px;
+        .recipes-item-informations-time {
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+          p {
+            margin-left: 7px;
+            font-weight: bold;
+          }
+        }
+      }
+    > div:last-child {
+      margin-top: 20px;
+      display: flex;
+      align-items: baseline;
+      font-size: 12px;
+      .recipes-item-information-ingredients {
+        font-family: 'Lato', sans-serif;
+        display: flex;
+        flex-direction: column;
+        row-gap: 2px;
+        width: 171px;
+      }
+      p {
+        font-family: 'Roboto', sans-serif;
+        width: 171px;
+      }
+    }
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
 }
