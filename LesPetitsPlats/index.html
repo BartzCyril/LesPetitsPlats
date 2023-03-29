@@ -14,15 +14,16 @@
 </header>
 <main>
     <form>
-            <input type="text" placeholder="Rechercher une recette">
+            <input id="search" type="text" placeholder="Rechercher une recette">
             <button>
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
     </form>
+    <div class="parent-filter-selected-item"></div>
     <section class="filters">
         <div id="ingredients" class="filters-items">
             <div>
-                <input type="text" placeholder="Rechercher un ingrédient" id="searchIngredients" onclick="filterItemsBySearch('searchIngredients')" class="hidden">
+                <input type="text" placeholder="Rechercher un ingrédient" id="searchIngredients" class="hidden">
                 <p>Ingredients</p>
                 <button>
                     <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +34,7 @@
         </div>
         <div id="appliance" class="filters-items filters-items-size">
             <div>
-                <input type="text" placeholder="Rechercher un appareil" id="searchAppliance" onclick="filterItemsBySearch('searchAppliance')" class="hidden">
+                <input type="text" placeholder="Rechercher un appareil" id="searchAppliance"  class="hidden">
                 <p>Appareils</p>
                 <button>
                     <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +45,7 @@
         </div>
         <div id="ustensils" class="filters-items filters-items-size">
             <div>
-                <input type="text" placeholder="Rechercher un ustensil" id="searchUstensils" onclick="filterItemsBySearch('searchUstensils')" class="hidden">
+                <input type="text" placeholder="Rechercher un ustensil" id="searchUstensils" class="hidden">
                 <p>Ustensiles</p>
                 <button>
                     <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">

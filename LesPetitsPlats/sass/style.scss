@@ -69,6 +69,29 @@ form {
   }
 }
 
+.parent-filter-selected-item {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  .filter-selected-item {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: fit-content;
+    p {
+      color: white;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    button {
+      margin-left: 13px;
+    }
+  }
+}
+
 .filters {
     display: flex;
     flex-direction: row;
@@ -109,6 +132,9 @@ form {
         color: white;
         p {
           font-size: 18px;
+          cursor: pointer;
+          width: fit-content;
+          height: fit-content;
         }
       }
     }
