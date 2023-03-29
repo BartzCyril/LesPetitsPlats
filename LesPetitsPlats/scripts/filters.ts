@@ -4,10 +4,8 @@ import {
     getArrayAppliance,
     getArrayIngredients, getArrayUstensils,
     getColorElement,
-    hiddenItems,
-    showItems
 } from "./functions";
-import {canMakeRecipes, updateRecipes} from "./recipes";
+import {updateRecipes} from "./recipes";
 
 declare global {
     interface Window {
@@ -101,13 +99,13 @@ function updateItems(recipes: Recipe[], create: boolean) {
                 }
             }
         }
-        hiddenItems(ingredients, arrayIngredients)
-        hiddenItems(ustensils, arrayUstensils)
-        hiddenItems(appliance, arrayApplicance)
+        hiddenFilterItems(ingredients, arrayIngredients)
+        hiddenFilterItems(ustensils, arrayUstensils)
+        hiddenFilterItems(appliance, arrayApplicance)
     } else {
-        showItems(ingredients)
-        showItems(ustensils)
-        showItems(appliance)
+        showFilterItems(ingredients)
+        showFilterItems(ustensils)
+        showFilterItems(appliance)
     }
     if (create) {
         return {
@@ -121,7 +119,7 @@ function updateItems(recipes: Recipe[], create: boolean) {
 
 export function addFilter(recipes: Recipe[]) {
     const filteredElements: NodeListOf<HTMLElement> = document.querySelectorAll('.filters-items-grid p')
-    let input: HTMLInputElement | null= null
+    let input: HTMLInputElement | null = null
     for (let i = 0; i < filteredElements.length; i++) {
         filteredElements[i].addEventListener('click', function () {
             const name: string = filteredElements[i].textContent as string
@@ -141,9 +139,8 @@ export function addFilter(recipes: Recipe[]) {
                     break
             }
             document.querySelector('.parent-filter-selected-item')!.insertAdjacentHTML('beforeend', createFilterItem(name, color))
-            filterRecipes(recipes)
+            updateRecipes(recipes, search)
             updateItems(recipes, false)
-            document.getElementById(name)!.classList.add("hidden")
         })
     }
 }
@@ -160,40 +157,72 @@ export function deleteFilter(recipes: Recipe[]) {
         const parentNode = this.parentNode as RemovableElement
         parentNode?.remove();
 
-        filterRecipes(recipes)
+        updateRecipes(recipes, search)
         updateItems(recipes, false)
     };
 }
 
-function filterRecipes(recipes: Recipe[]) {
-    for (let i = 0; i < recipes.length; i++) {
-        if (!recipes[i].name.toLowerCase().includes(search.value.toLowerCase().trim()) || !canMakeRecipes(recipes, i)) {
-            document.getElementById(recipes[i].name)!.classList.add("hidden")
-        } else {
-            document.getElementById(recipes[i].name)!.classList.remove("hidden")
+export function hiddenFilterItems(array1: string[] | null, array2: string[] | null) {
+    if (array1 !== null && array2 !== null) {
+        for (let i = 0; i < array1.length; i++) {
+            if (!belongsElementArray(array2, array1[i])) {
+                document.getElementById(array1[i])!.classList.add("hidden")
+            } else {
+                document.getElementById(array1[i])!.classList.remove("hidden")
+            }
+        }
+    }
+    const filterSelectedItems: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.filter-selected-item p')
+    for (let i = 0; i < filterSelectedItems.length; i++) {
+        const value = filterSelectedItems[i].textContent as string
+        document.getElementById(value)!.classList.add("hidden")
+    }
+}
+
+
+export function showFilterItems(array: string[]) {
+    for (let i = 0; i < array.length; i++) {
+        if (document.getElementById(array[i])!.classList.contains("hidden")) {
+            document.getElementById(array[i])!.classList.remove("hidden")
         }
     }
 }
 
+/**
+ * Filters the recipes by search input.
+ *
+ * @param {Recipe[]} recipes - An array of recipe objects.
+ * @param {string} idCategoryInput - The ID of the category input element.
+ * @returns {void}
+ */
 export function filterRecipesBySearch(recipes: Recipe[]) {
     search.addEventListener('input', function () {
-        if (document.querySelectorAll('.filter-selected-item p').length > 0) {
-            let newArrayRecipes: Recipe[] = []
-            for (let i = 0; i < recipes.length; i++) {
-                if (!document.getElementById(recipes[i].name)!.classList.contains("hidden"))
-                    newArrayRecipes.push(recipes[i])
+        if (search.value.length >= 3) {
+            if (document.querySelectorAll('.filter-selected-item p').length > 0) {
+                let newArrayRecipes: Recipe[] = []
+                for (let i = 0; i < recipes.length; i++) {
+                    if (!document.getElementById(recipes[i].name)!.classList.contains("hidden"))
+                        newArrayRecipes.push(recipes[i])
+                }
+                updateRecipes(newArrayRecipes, this)
+            } else {
+                updateRecipes(recipes, this)
             }
-            updateRecipes(newArrayRecipes, this)
-            filterRecipes(recipes)
-        } else {
+        } else if (search.value.length === 0) {
             updateRecipes(recipes, this)
-            filterRecipes(recipes)
         }
         updateItems(recipes, false)
     })
 }
 
-export function filterItemsBySearch(recipes: Recipe[], idCategoryInput: string) {
+/**
+ * Filters the filters items by search input.
+ *
+ * @param {Recipe[]} recipes - An array of recipe objects.
+ * @param {string} idCategoryInput - The ID of the category input element.
+ * @returns {void}
+ */
+export function filterItemsBySearch(recipes: Recipe[], idCategoryInput: string): void {
     let array: string[]
     let value: string
     const objet = updateItems(recipes, true) as { ingredients: string[], ustensils: string[], appliance: string[] }
@@ -224,12 +253,7 @@ export function filterItemsBySearch(recipes: Recipe[], idCategoryInput: string) 
                 document.getElementById(array[i])!.classList.remove("hidden")
         }
     }
-   const filterSelectedItems: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.filter-selected-item p')
-    console.log(filterSelectedItems)
-    for (let i=0 ; i < filterSelectedItems.length ;i++) {
-        const value = filterSelectedItems[i].textContent as string
-        document.getElementById(value)!.classList.add("hidden")
-    }
+    hiddenFilterItems(null, null)
 }
 
 

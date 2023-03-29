@@ -1,6 +1,12 @@
 import {Recipe} from "./interface/Recipe";
 
-export function displayRecipes(recipes: Recipe[]) {
+/**
+ * Displays the recipes on the webpage.
+ *
+ * @param {Recipe[]} recipes - An array of recipe objects.
+ * @returns {void}
+ */
+export function displayRecipes(recipes: Recipe[]): void {
     for (let i=0; i < recipes.length; i++) {
         let ingredients: string = ""
         for (let j=0; j < recipes[i].ingredients.length; j++) {
@@ -31,7 +37,14 @@ export function displayRecipes(recipes: Recipe[]) {
     }
 }
 
-export function canMakeRecipes(recipes: Recipe[], key: number) {
+/**
+ * Determines if a recipe can be made based on selected ingredients, appliances and ustensils.
+ *
+ * @param {Recipe[]} recipes - An array of recipe objects.
+ * @param {number} key - The index of the recipe object to check.
+ * @returns {boolean} - Returns true if the recipe can be made with the selected ingredients, appliances and ustensils, otherwise false.
+ */
+function canMakeRecipes(recipes: Recipe[], key: number): boolean {
     const items: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.filter-selected-item p')
     if (items.length === 0) {
         return true
@@ -57,12 +70,19 @@ export function canMakeRecipes(recipes: Recipe[], key: number) {
     return counter === items.length;
 }
 
-export function updateRecipes(array: Recipe[], input: HTMLInputElement) {
-    for (let i = 0; i < array.length; i++) {
-        if (!array[i].name.toLowerCase().includes(input.value.toLowerCase().trim()))
-            document.getElementById(array[i].name)!.classList.add("hidden")
+/**
+ * Updates the displayed recipes based on the user input and selected ingredients, appliances and ustensils.
+ *
+ * @param {Recipe[]} recipes - An array of recipe objects.
+ * @param {HTMLInputElement} input - The input element that contains the user's search query.
+ * @returns {void}
+ */
+export function updateRecipes(recipes: Recipe[], input: HTMLInputElement): void {
+    for (let i = 0; i < recipes.length; i++) {
+        if (!recipes[i].name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, i))
+            document.getElementById(recipes[i].name)!.classList.add("hidden")
         else
-            document.getElementById(array[i].name)!.classList.remove("hidden")
+            document.getElementById(recipes[i].name)!.classList.remove("hidden")
     }
 }
 
