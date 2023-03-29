@@ -79,26 +79,27 @@ function updateItems(recipes: Recipe[], create: boolean) {
     const appliance: string[] = getArrayAppliance(recipes)
     const ustensils: string[] = getArrayUstensils(recipes)
     if (items.length !== 0 || search.value.length !== 0) {
-        for (let j = 0; j < recipes.length; j++) {
-            if (!document.getElementById(recipes[j].name)!.classList.contains("hidden")) {
-                // ingredients
-                for (let k = 0; k < recipes[j].ingredients.length; k++) {
-                    if (!belongsElementArray(arrayIngredients, recipes[j].ingredients[k].ingredient.toLowerCase())) {
-                        arrayIngredients.push(recipes[j].ingredients[k].ingredient)
+        recipes.forEach((element) => {
+            if (!document.getElementById(element.name)!.classList.contains("hidden")) {
+                element.ingredients.forEach(ingredient => {
+                    if (!belongsElementArray(arrayIngredients, ingredient.ingredient.toLowerCase())) {
+                        arrayIngredients.push(ingredient.ingredient)
                     }
-                }
+                })
+
                 // ustensils
-                for (let k = 0; k < recipes[j].ustensils.length; k++) {
-                    if (!belongsElementArray(arrayUstensils, recipes[j].ustensils[k].toLowerCase())) {
-                        arrayUstensils.push(recipes[j].ustensils[k])
+                element.ustensils.forEach(ustensil => {
+                    if (!belongsElementArray(arrayUstensils, ustensil.toLowerCase())) {
+                        arrayUstensils.push(ustensil)
                     }
-                }
+                })
+
                 // appliance
-                if (!belongsElementArray(arrayApplicance, recipes[j].appliance.toLowerCase())) {
-                    arrayApplicance.push(recipes[j].appliance)
+                if (!belongsElementArray(arrayApplicance, element.appliance.toLowerCase())) {
+                    arrayApplicance.push(element.appliance)
                 }
             }
-        }
+        })
         hiddenFilterItems(ingredients, arrayIngredients)
         hiddenFilterItems(ustensils, arrayUstensils)
         hiddenFilterItems(appliance, arrayApplicance)
@@ -164,28 +165,29 @@ export function deleteFilter(recipes: Recipe[]) {
 
 export function hiddenFilterItems(array1: string[] | null, array2: string[] | null) {
     if (array1 !== null && array2 !== null) {
-        for (let i = 0; i < array1.length; i++) {
-            if (!belongsElementArray(array2, array1[i])) {
-                document.getElementById(array1[i])!.classList.add("hidden")
+        array1.forEach(element => {
+            if (!belongsElementArray(array2, element)) {
+                document.getElementById(element)!.classList.add("hidden")
             } else {
-                document.getElementById(array1[i])!.classList.remove("hidden")
+                document.getElementById(element)!.classList.remove("hidden")
             }
-        }
+        })
     }
+
     const filterSelectedItems: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.filter-selected-item p')
-    for (let i = 0; i < filterSelectedItems.length; i++) {
-        const value = filterSelectedItems[i].textContent as string
+    filterSelectedItems.forEach(filter => {
+        const value = filter.textContent as string
         document.getElementById(value)!.classList.add("hidden")
-    }
+    })
 }
 
 
 export function showFilterItems(array: string[]) {
-    for (let i = 0; i < array.length; i++) {
-        if (document.getElementById(array[i])!.classList.contains("hidden")) {
-            document.getElementById(array[i])!.classList.remove("hidden")
+    array.forEach((item) => {
+        if (document.getElementById(item)!.classList.contains("hidden")) {
+            document.getElementById(item)!.classList.remove("hidden");
         }
-    }
+    });
 }
 
 /**
@@ -199,11 +201,9 @@ export function filterRecipesBySearch(recipes: Recipe[]) {
     search.addEventListener('input', function () {
         if (search.value.length >= 3) {
             if (document.querySelectorAll('.filter-selected-item p').length > 0) {
-                let newArrayRecipes: Recipe[] = []
-                for (let i = 0; i < recipes.length; i++) {
-                    if (!document.getElementById(recipes[i].name)!.classList.contains("hidden"))
-                        newArrayRecipes.push(recipes[i])
-                }
+                const newArrayRecipes: Recipe[] = recipes.filter(recipe => {
+                    return !document.getElementById(recipe.name)!.classList.contains("hidden");
+                });
                 updateRecipes(newArrayRecipes, this)
             } else {
                 updateRecipes(recipes, this)

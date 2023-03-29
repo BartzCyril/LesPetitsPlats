@@ -45,29 +45,16 @@ export function displayRecipes(recipes: Recipe[]): void {
  * @returns {boolean} - Returns true if the recipe can be made with the selected ingredients, appliances and ustensils, otherwise false.
  */
 function canMakeRecipes(recipes: Recipe[], key: number): boolean {
-    const items: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.filter-selected-item p')
+    const items: string[] = Array.from(document.querySelectorAll('.filter-selected-item p')).map(p => p.textContent!.toLowerCase());
     if (items.length === 0) {
-        return true
+        return true;
     }
-    let counter: number = 0
-    for (let i = 0; i < recipes[key].ingredients.length; i++) {
-        for (let j = 0; j < items.length; j++) {
-            if (items[j]!.textContent!.toLowerCase() === recipes[key].ingredients[i].ingredient.toLowerCase())
-                counter++
-        }
-    }
-    for (let j = 0; j < items.length; j++) {
-        if (items[j]!.textContent!.toLowerCase() === recipes[key].appliance.toLowerCase())
-            counter++
-    }
+    const ingredients: string[] = recipes[key].ingredients.map(i => i.ingredient.toLowerCase());
+    const ustensils: string[] = recipes[key].ustensils.map(u => u.toLowerCase());
 
-    for (let i = 0; i < recipes[key].ustensils.length; i++) {
-        for (let j = 0; j < items.length; j++) {
-            if (items[j]!.textContent!.toLowerCase() === recipes[key].ustensils[i].toLowerCase())
-                counter++
-        }
-    }
-    return counter === items.length;
+    const matchedItems: string[] = items.filter(item => ingredients.includes(item) || ustensils.includes(item) || recipes[key].appliance.toLowerCase() === item);
+
+    return matchedItems.length === items.length;
 }
 
 /**
@@ -78,11 +65,10 @@ function canMakeRecipes(recipes: Recipe[], key: number): boolean {
  * @returns {void}
  */
 export function updateRecipes(recipes: Recipe[], input: HTMLInputElement): void {
-    for (let i = 0; i < recipes.length; i++) {
-        if (!recipes[i].name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, i))
-            document.getElementById(recipes[i].name)!.classList.add("hidden")
+    recipes.forEach((recipe, index) => {
+        if (!recipe.name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, index))
+            document.getElementById(recipe.name)!.classList.add("hidden")
         else
-            document.getElementById(recipes[i].name)!.classList.remove("hidden")
-    }
+            document.getElementById(recipe.name)!.classList.remove("hidden")
+    });
 }
-

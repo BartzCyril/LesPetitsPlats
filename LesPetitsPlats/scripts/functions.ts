@@ -1,11 +1,7 @@
 import {Recipe} from "./interface/Recipe";
 
 export function belongsElementArray(array: string[], element: string) {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].toLowerCase() === element.toLowerCase())
-            return true
-    }
-    return false
+    return array.map(item => item.toLowerCase()).includes(element.toLowerCase())
 }
 
 export function getArrayIngredients(recipe: Recipe[]) {
