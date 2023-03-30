@@ -58,6 +58,31 @@ function canMakeRecipes(recipes: Recipe[], key: number): boolean {
 }
 
 /**
+ * Displays an error message if no recipes match the search criteria.
+ * @param {number} count - The number of recipes that do not match the search criteria.
+ * @param {number} countMax - The number of recipes
+ * @returns {void}
+ */
+function displayRecipesError(count: number, countMax: number) : void{
+    const sectionRecipes = document.querySelector('.recipes')
+    const recipesError = document.getElementById('recipesError')
+    if (count === countMax) {
+        if (recipesError === null) {
+            const p = document.createElement('p')
+            p.id = "recipesError"
+            p.style.position = "absolute"
+            p.textContent = "Aucune recette ne correspond à votre critère... vous pouvez\n" +
+                "chercher « tarte aux pommes », « poisson », etc."
+            sectionRecipes!.appendChild(p)
+        }
+    } else {
+        if (recipesError !== null) {
+            recipesError.remove()
+        }
+    }
+}
+
+/**
  * Updates the displayed recipes based on the user input and selected ingredients, appliances and ustensils.
  *
  * @param {Recipe[]} recipes - An array of recipe objects.
@@ -65,10 +90,16 @@ function canMakeRecipes(recipes: Recipe[], key: number): boolean {
  * @returns {void}
  */
 export function updateRecipes(recipes: Recipe[], input: HTMLInputElement): void {
+    let counter: number = 0
     recipes.forEach((recipe, index) => {
-        if (!recipe.name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, index))
+        if (!recipe.name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, index)) {
             document.getElementById(recipe.name)!.classList.add("hidden")
+            counter++
+        }
         else
             document.getElementById(recipe.name)!.classList.remove("hidden")
     });
+    displayRecipesError(counter, recipes.length)
 }
+
+
