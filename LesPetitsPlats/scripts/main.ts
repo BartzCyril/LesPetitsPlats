@@ -29,12 +29,10 @@ document.querySelector('#ingredients button')!.addEventListener('click', functio
     if (closeModalAppliance && closeModalUstensils)
         closeModalIngredients = closeOpenModalCategoryFilters('ingredients', "pathSvgIngredients", closeModalIngredients, "gridIngredients", "searchIngredients")
 })
-
 document.querySelector('#appliance button')!.addEventListener('click', function () {
     if (closeModalIngredients && closeModalUstensils)
         closeModalAppliance = closeOpenModalCategoryFilters('appliance', "pathSvgAppliance", closeModalAppliance, "gridAppliance", "searchAppliance")
 })
-
 document.querySelector('#ustensils button')!.addEventListener('click', function () {
     if (closeModalAppliance && closeModalIngredients)
         closeModalUstensils = closeOpenModalCategoryFilters('ustensils', "pathSvgUstensils", closeModalUstensils, "gridUstensils", "searchUstensils")

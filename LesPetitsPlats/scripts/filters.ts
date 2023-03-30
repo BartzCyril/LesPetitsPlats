@@ -19,7 +19,14 @@ interface RemovableElement extends HTMLElement {
 
 const search: HTMLInputElement = document.getElementById("search") as HTMLInputElement
 
-export function displayItemsFilters(category: HTMLElement | null, array: string[], idGrid: string) {
+/**
+ Displays the items filters in the given category element.
+ @param {HTMLElement | null} category - The category element where the items filters will be displayed.
+ @param {string[]} array - The array of items to display as filters.
+ @param {string} idGrid - The id of the grid element that will contain the filters.
+ @returns {void}
+ */
+export function displayItemsFilters(category: HTMLElement | null, array: string[], idGrid: string): void {
     let itemsCategory: string = ""
     for (let i = 0; i < array.length; i++) {
         itemsCategory += `<p id="${array[i]}">${array[i]}</p>`
@@ -31,7 +38,16 @@ export function displayItemsFilters(category: HTMLElement | null, array: string[
     `)
 }
 
-export function closeOpenModalCategoryFilters(idCategory: string, idSvgPath: string, closeModal: boolean, idGrid: string, idSearch: string) {
+/**
+ Closes or opens a modal that displays category filters and updates the UI accordingly
+ @param {string} idCategory - The ID of the category filter container element
+ @param {string} idSvgPath - The ID of the SVG path element used for the modal button
+ @param {boolean} closeModal - A boolean indicating whether the modal should be closed or opened
+ @param {string} idGrid - The ID of the grid container element
+ @param {string} idSearch - The ID of the search input element
+ @returns {boolean} - The updated value of closeModal after the function has been called
+ */
+export function closeOpenModalCategoryFilters(idCategory: string, idSvgPath: string, closeModal: boolean, idGrid: string, idSearch: string): boolean {
     const svgPathModalOpen: string = "M1.88 10.5466L8 4.43996L14.12 10.5466L16 8.66663L8 0.66663L1.64355e-07 8.66663L1.88 10.5466Z"
     const svgPathModelClose: string = "M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z"
     const pathSvg: HTMLElement = document.getElementById(idSvgPath) as HTMLElement
@@ -57,7 +73,14 @@ export function closeOpenModalCategoryFilters(idCategory: string, idSvgPath: str
     return closeModal
 }
 
-function createFilterItem(name: string, color: string) {
+/**
+
+ Generates the HTML for a filter item with the provided name and color.
+ @param {string} name - The name of the filter item.
+ @param {string} color - The color of the filter item.
+ @returns {string} - The HTML code for the filter item.
+ */
+function createFilterItem(name: string, color: string): string {
     return `
         <div style="background-color: ${color}" class="filter-selected-item">
             <p>${name}</p>
@@ -70,7 +93,14 @@ function createFilterItem(name: string, color: string) {
     `
 }
 
-function updateItems(recipes: Recipe[], create: boolean) {
+/**
+
+ Updates the displayed filter items based on the current state of the recipes and search field, and updates the filter items based on whether or not a new filter-selected-item has been created.
+ @param {Recipe[]} recipes - An array of recipes to use for updating the filter items
+ @param {boolean} create - A flag indicating whether or not a new filter-selected-item has been created
+ @returns {Object|null} - An object containing updated filter item arrays, or null if no filter-selected-item has been created
+ */
+function updateItems(recipes: Recipe[], create: boolean): object | null {
     const items = document.querySelectorAll('.filter-selected-item p')
     let arrayIngredients: string[] = []
     let arrayUstensils: string[] = []
@@ -117,7 +147,12 @@ function updateItems(recipes: Recipe[], create: boolean) {
     return null
 }
 
-export function addFilter(recipes: Recipe[]) {
+/**
+ Adds a filter-selected-item to the DOM when a filter item is clicked, and then updates the displayed recipes and filter items.
+ @param {Recipe[]} recipes - An array of recipes to update after adding the filter-selected-item
+ @returns {void}
+ */
+export function addFilter(recipes: Recipe[]): void {
     const filteredElements: NodeListOf<HTMLElement> = document.querySelectorAll('.filters-items-grid p')
     let input: HTMLInputElement | null = null
     for (let i = 0; i < filteredElements.length; i++) {
@@ -145,7 +180,12 @@ export function addFilter(recipes: Recipe[]) {
     }
 }
 
-export function deleteFilter(recipes: Recipe[]) {
+/**
+ Deletes a filter-selected-item by removing its HTML element from the DOM, and then updates the displayed recipes and filter items.
+ @param {Recipe[]} recipes - An array of recipes to update after deleting the filter-selected-item
+ @returns {void}
+ */
+export function deleteFilter(recipes: Recipe[]): void {
     window.deleteFilterSelectedItem = function (this: HTMLElement) {
         const name: string = this.dataset.name as string;
         if (!name) return;
@@ -162,7 +202,14 @@ export function deleteFilter(recipes: Recipe[]) {
     };
 }
 
-export function hiddenFilterItems(array1: string[] | null, array2: string[] | null) {
+/**
+ Hides filter items that are not selected by adding the "hidden" class to elements in array1 that do not belong to array2.
+ Also hides filter-selected-items by adding the "hidden" class to their respective elements.
+ @param {string[] | null} array1 - An array of element IDs to hide
+ @param {string[] | null} array2 - An array of selected element IDs
+ @returns {void}
+ */
+export function hiddenFilterItems(array1: string[] | null, array2: string[] | null): void {
     if (array1 !== null && array2 !== null) {
         for (let i = 0; i < array1.length; i++) {
             if (!belongsElementArray(array2, array1[i])) {
@@ -179,8 +226,12 @@ export function hiddenFilterItems(array1: string[] | null, array2: string[] | nu
     }
 }
 
-
-export function showFilterItems(array: string[]) {
+/**
+ Displays filter items by removing the "hidden" class from elements in the array
+ @param {string[]} array - An array of element IDs to display
+ @returns {void}
+ */
+export function showFilterItems(array: string[]): void {
     for (let i = 0; i < array.length; i++) {
         if (document.getElementById(array[i])!.classList.contains("hidden")) {
             document.getElementById(array[i])!.classList.remove("hidden")
