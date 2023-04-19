@@ -92,7 +92,10 @@ function displayRecipesError(count: number, countMax: number) : void{
 export function updateRecipes(recipes: Recipe[], input: HTMLInputElement): void {
     let counter: number = 0
     recipes.forEach((recipe, index) => {
-        if (!recipe.name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, index)) {
+        let hasMatch = recipes[index].ingredients.some(ingredient =>
+            ingredient.ingredient.toLowerCase().includes(input.value.toLowerCase().trim())
+        );
+        if (!recipe.name.toLowerCase().includes(input.value.toLowerCase().trim()) && !recipe.description.toLowerCase().includes(input.value.toLowerCase().trim()) && !hasMatch || !canMakeRecipes(recipes, index)) {
             document.getElementById(recipe.name)!.classList.add("hidden")
             counter++
         }
