@@ -105,7 +105,18 @@ function displayRecipesError(count: number, countMax: number) : void{
 export function updateRecipes(recipes: Recipe[], input: HTMLInputElement): void {
     let counter: number = 0
     for (let i = 0; i < recipes.length; i++) {
-        if (!recipes[i].name.toLowerCase().includes(input.value.toLowerCase().trim()) || !canMakeRecipes(recipes, i)) {
+        let hasMatch = false;
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+            if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(input.value.toLowerCase().trim())) {
+                hasMatch = true;
+                break;
+            }
+        }
+        if (!recipes[i].name.toLowerCase().includes(input.value.toLowerCase().trim()) &&
+            !recipes[i].description.toLowerCase().includes(input.value.toLowerCase().trim()) &&
+            !hasMatch ||
+            !canMakeRecipes(recipes, i))
+        {
             document.getElementById(recipes[i].name)!.classList.add("hidden")
             counter++
         }
