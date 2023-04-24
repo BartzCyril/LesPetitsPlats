@@ -26,15 +26,24 @@ displayItemsFilters(divApplicance, appliance, "gridAppliance")
 displayItemsFilters(divUstensils, ustensils, "gridUstensils")
 
 document.querySelector('#ingredients button')!.addEventListener('click', function () {
-    if (closeModalAppliance && closeModalUstensils)
+        if (!closeModalAppliance)
+            closeModalAppliance = closeOpenModalCategoryFilters('appliance', "pathSvgAppliance", closeModalAppliance, "gridAppliance", "searchAppliance")
+        if (!closeModalUstensils)
+            closeModalUstensils = closeOpenModalCategoryFilters('ustensils', "pathSvgUstensils", closeModalUstensils, "gridUstensils", "searchUstensils")
         closeModalIngredients = closeOpenModalCategoryFilters('ingredients', "pathSvgIngredients", closeModalIngredients, "gridIngredients", "searchIngredients")
 })
 document.querySelector('#appliance button')!.addEventListener('click', function () {
-    if (closeModalIngredients && closeModalUstensils)
+        if (!closeModalIngredients)
+            closeModalIngredients = closeOpenModalCategoryFilters('ingredients', "pathSvgIngredients", closeModalIngredients, "gridIngredients", "searchIngredients")
+        if (!closeModalUstensils)
+            closeModalUstensils = closeOpenModalCategoryFilters('ustensils', "pathSvgUstensils", closeModalUstensils, "gridUstensils", "searchUstensils")
         closeModalAppliance = closeOpenModalCategoryFilters('appliance', "pathSvgAppliance", closeModalAppliance, "gridAppliance", "searchAppliance")
 })
 document.querySelector('#ustensils button')!.addEventListener('click', function () {
-    if (closeModalAppliance && closeModalIngredients)
+        if (!closeModalAppliance)
+            closeModalAppliance = closeOpenModalCategoryFilters('appliance', "pathSvgAppliance", closeModalAppliance, "gridAppliance", "searchAppliance")
+        if (!closeModalIngredients)
+            closeModalIngredients = closeOpenModalCategoryFilters('ingredients', "pathSvgIngredients", closeModalIngredients, "gridIngredients", "searchIngredients")
         closeModalUstensils = closeOpenModalCategoryFilters('ustensils', "pathSvgUstensils", closeModalUstensils, "gridUstensils", "searchUstensils")
 })
 
