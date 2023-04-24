@@ -124,6 +124,8 @@ form {
         }
       }
       .filters-items-grid {
+        max-height: 200px;
+        overflow: auto;
         margin-top: 27px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
