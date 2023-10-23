@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Les petits plats</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="module" crossorigin src="/LesPetitsPlats/assets/index-dec46128.js"></script>
+  <link rel="stylesheet" href="/LesPetitsPlats/assets/index-ebd57872.css">
+</head>
+<body>
+<header>
+    <img src="/LesPetitsPlats/assets/logo-eddc3233.svg" alt="logo">
+    <h1>Les petits plats</h1>
+</header>
+<main>
+    <form>
+            <input id="search" type="text" placeholder="Rechercher une recette">
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+    </form>
+    <div class="parent-filter-selected-item"></div>
+    <section class="filters">
+        <div id="ingredients" class="filters-items filters-items-size">
+            <div>
+                <input type="text" placeholder="Rechercher un ingrédient" id="searchIngredients" class="hidden">
+                <p>Ingredients</p>
+                <button>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgIngredients" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="appliance" class="filters-items filters-items-size">
+            <div>
+                <input type="text" placeholder="Rechercher un appareil" id="searchAppliance"  class="hidden">
+                <p>Appareils</p>
+                <button>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgAppliance" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="ustensils" class="filters-items filters-items-size">
+            <div>
+                <input type="text" placeholder="Rechercher un ustensil" id="searchUstensils" class="hidden">
+                <p>Ustensiles</p>
+                <button>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="pathSvgUstensils" d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="recipes"></section>
+</main>
+
+</body>
+</html>
