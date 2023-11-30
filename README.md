@@ -2,7 +2,14 @@
 
 ## Sujet
 
-L'entreprise, spécialisée dans l'édition de livres de cuisine, lance un projet ambitieux : créer un site de recettes similaire à Marmiton ou 750g. Sandra, cheffe de projet, supervise cette digitalisation. Actuellement, vous travaillez en tant que freelance sur la fonctionnalité de recherche. Vous devez créer deux implémentations distinctes pour comparer leurs performances. La première étape consiste à développer l'interface en respectant le design donné. Ensuite, vous planifierez et détaillerez les deux versions de la fonctionnalité de recherche. Vous implémenterez ensuite ces versions et mesurerez leurs performances. Le choix du meilleur algorithme sera basé sur ces tests.
+L'entreprise, spécialisée dans l'édition de livres de cuisine, lance un projet ambitieux : créer un site de recettes similaire à Marmiton ou 750g. 
+Sandra, cheffe de projet, supervise cette digitalisation. 
+Actuellement, vous travaillez en tant que freelance sur la fonctionnalité de recherche. 
+Vous devez créer deux implémentations distinctes pour comparer leurs performances.
+La première étape consiste à développer l'interface en respectant le design donné. 
+Ensuite, vous planifierez et détaillerez les deux versions de la fonctionnalité de recherche.
+Vous implémenterez ensuite ces versions et mesurerez leurs performances. 
+Le choix du meilleur algorithme sera basé sur ces tests.
 
 ## Compétences acquises
 
